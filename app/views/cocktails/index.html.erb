@@ -1,0 +1,13 @@
+<h1 class="text-center">Cocktails</h1>
+
+<div class="banner">
+  <ul class="col-6 justify-content-center">
+    <% @cocktails.each do |cocktail| %>
+      <li class="d-flex justify-content-between"><%= link_to cocktail.name, cocktail_path(cocktail) %></li>
+    <% end %>
+  </ul>
+</div>
+
+<button class="btn">
+  <%= link_to "Add a new cocktail", new_cocktail_path %>
+</button>

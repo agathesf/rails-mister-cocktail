@@ -18,7 +18,6 @@
 .banner p {
   font-size: 20px;
   color: white;
-  opacity: .7;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
@@ -57,8 +56,49 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+.card-category:hover {
+  opacity: .9;
 }
 
 .cocktail-name {
   color: white;
 }
+
+.cocktail-name:hover {
+  color: white;
+  text-decoration: none;
+}
+
+ul {
+  margin-top: 30px;
+  padding: 0px;
+  width: 300px;
+  list-style-type: none;
+}
+
+.tag {
+  border: 1px solid #4A4A4A;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: lighter;
+  background-color: rgba(1,1,1,0.1);
+  transition: background 1s;
+}
+
+.tag:hover {
+  background-color: rgba(1,1,1,0.4);
+}
+
+.fas {
+  color: gray;
+  transition: color 0.2s;
+}
+
+.fas:hover {
+ color: white;
+}
+

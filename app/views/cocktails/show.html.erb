@@ -1,14 +1,20 @@
-<h1>Cocktail : <%= @cocktail.name %></h1>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?cocktails);">
+  <div class="container">
+    <h1><%= @cocktail.name %></h1>
+    <p>Allez, un ptit <%= @cocktail.name %> 🍑 sec!</p>
+    <%= link_to "< Back", cocktails_path, class: "btn btn-ghost" %>
+    <%= link_to "Add an ingredient", new_cocktail_dose_path(@cocktail), class: "btn btn-ghost" %>
+  </div>
+</div>
 
-<h2>Details :</h2>
-<ul class="col-6 justify-content-center">
-  <% @cocktail.doses.each do |dose| %>
-    <li class="d-flex justify-content-between"><%= dose.description %> of <%= dose.ingredient.name %></li>
-    <%= link_to dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } do %>
-    <i class="far fa-trash-alt"></i>
+<div class="container">
+  <ul>
+    <% @cocktail.doses.each do |dose| %>
+      <li class="tag d-flex justify-content-between"><%= dose.description %> of <%= dose.ingredient.name %>
+        <%= link_to dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } do %>
+        <i class="fas fa-times"></i>
+      <% end %>
+      </li>
     <% end %>
-  <% end %>
-</ul>
-
-<%= link_to "List of cocktails", cocktails_path %>
-<%= link_to "Add an ingredient", new_cocktail_dose_path(@cocktail) %>
+  </ul>
+</div>

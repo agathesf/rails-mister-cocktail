@@ -7,19 +7,31 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'open-uri'
+require 'json'
 
-puts 'Cleaning database...'
+Dose.destroy_all
 Ingredient.destroy_all
 
 url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
 drinks_serialized = open(url).read
+
 list_drinks = JSON.parse(drinks_serialized)
 my_drinks = list_drinks['drinks']
 
+puts 'Creating drinks...'
 ingredients = []
 my_drinks.each do |drink|
-  ingredients << drink['strIngredient1']
+  ingredients << drink["strIngredient1"]
 end
-ingredients.first(10).each do |ingredient|
-  Ingredient.create(name: ingredient)
+10.times do
+  ingredients.each do |ingredient|
+    Ingredient.create(name: ingredient)
+  end
 end
+
+Cocktail.create(name: "Mojito")
+Cocktail.create(name: "Margarita")
+Cocktail.create(name: "Pina Colada")
+Cocktail.create(name: "Bloody Mary")
+Cocktail.create(name: "Gin Tonic")
+Cocktail.create(name: "Cosmopolitan")

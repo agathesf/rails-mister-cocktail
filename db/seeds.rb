@@ -6,22 +6,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-require "faker"
+require 'open-uri'
 
+puts 'Cleaning database...'
 Ingredient.destroy_all
 
-10.times do
-  @ingredient = Ingredient.new(
-    name: Faker::Food.ingredient
-  )
-  @ingredient.save
+url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+drinks_serialized = open(url).read
+list_drinks = JSON.parse(drinks_serialized)
+my_drinks = list_drinks['drinks']
+
+ingredients = []
+my_drinks.each do |drink|
+  ingredients << drink['strIngredient1']
 end
-
-Cocktail.destroy_all
-
-10.times do
-  @cocktail = Cocktail.new(
-    name: Faker::Food.ingredient
-  )
-  @cocktail.save
+ingredients.first(10).each do |ingredient|
+  Ingredient.create(name: ingredient)
 end

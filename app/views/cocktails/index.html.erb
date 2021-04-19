@@ -1,17 +1,25 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?cocktails);">
-  <div class="container">
-    <h1>Create your own <strong>cocktails</strong> on <strong>Mix&Twist</strong>!</h1>
-    <p>Cheers! Have fun 🍸</p>
-    <%= link_to "Add a new cocktail", new_cocktail_path, class: "btn btn-ghost" %>
-  </div>
-</div>
+<div class="left-right d-flex">
+  
+  <div class="left col-6" style="background-color: gold;">
+    
+    <h1>MIX&TWIST</h1>
 
-<div class="container">
-  <div class="cards">
-    <% @cocktails.each do |cocktail| %>
-      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://source.unsplash.com/1600x900/?cocktail)">
-        <%= link_to cocktail.name, cocktail_path(cocktail), class: "cocktail-name"%>
-      </div>
-    <% end %>
+    <div class="bottom d-flex">
+      <p>Cheers</p>
+      <%= link_to new_cocktail_path do%>
+        <i class="fas fa-plus add"></i>
+      <% end %>
+    </div>
   </div>
+
+  <div class="right container col-6" style="background-color: black;">
+    <div class="cards">
+      <% @cocktails.each do |cocktail| %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://source.unsplash.com/1600x900/?cocktail)">
+          <%= link_to cocktail.name, cocktail_path(cocktail), class: "cocktail-name"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
 </div>

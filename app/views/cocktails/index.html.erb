@@ -5,19 +5,22 @@
     <h1>MIX&TWIST</h1>
 
     <div class="bottom d-flex">
-      <p>Cheers</p>
+      <p><span> </span></p>
       <%= link_to new_cocktail_path do%>
         <i class="fas fa-plus add"></i>
       <% end %>
+      <p class="moto">List your signature <em style="font-family: Pinyon Script; font-size: 50px; line-height: 30px;"> cocktail </em> recipes in this custom online bartending manual and master the subtle <em style="font-family: Pinyon Script; font-size: 50px; line-height: 30px;">art</em> <br> of balancing the elements that makes cocktail the most fancy of drinks.</p>
     </div>
   </div>
 
   <div class="right col-6" style="background-color: black;">
     <div class="cards">
       <% @cocktails.each do |cocktail| %>
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://source.unsplash.com/1600x900/?<%=cocktail.name.tr(' ', '')%>)">
-          <%= link_to cocktail.name, cocktail_path(cocktail), class: "cocktail-name"%>
-        </div>
+        <%= link_to cocktail_path(cocktail) do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://source.unsplash.com/1600x900/?<%=cocktail.name.tr(' ', '')%>)">
+            <p class="cocktail-name"> <%= cocktail.name %></p>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

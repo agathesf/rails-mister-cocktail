@@ -1,20 +1,30 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?cocktails);">
-  <div class="container">
-    <h1><%= @cocktail.name %></h1>
-    <p>Allez, un ptit <%= @cocktail.name %> 🍑 sec!</p>
-    <%= link_to "< Back", cocktails_path, class: "btn btn-ghost" %>
-    <%= link_to "Add an ingredient", new_cocktail_dose_path(@cocktail), class: "btn btn-ghost" %>
+<div class="left-right d-flex">
+
+  <div class="left col-8" style="background-color: black;">
+    <h1 style="color: white"><%= @cocktail.name.upcase %></h1>
+
+    <div class="ingredient d-flex">
+      <%= link_to "< Back", cocktails_path, class: "btn btn-ghost", style: 'color: white;' %>
+      <%= link_to new_cocktail_dose_path(@cocktail) do %>
+        <i class="fas fa-plus add" style="color: white !important"></i>
+      <% end %>
+      <div class="">
+            <ul>
+              <% @cocktail.doses.each do |dose| %>
+                <li class="tag d-flex justify-content-between"><%= dose.description %> of <%= dose.ingredient.name %>
+                  <%= link_to dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <i class="fas fa-times"></i>
+                <% end %>
+                </li>
+              <% end %>
+            </ul>
+      </div>
+    </div>
   </div>
+  
+  <div class="right col-4" style="background-color: gold; height: 100vh;">
+    <i class="glass fas fa-glass-martini-alt"></i>
+  </div>
+
 </div>
 
-<div class="container">
-  <ul>
-    <% @cocktail.doses.each do |dose| %>
-      <li class="tag d-flex justify-content-between"><%= dose.description %> of <%= dose.ingredient.name %>
-        <%= link_to dose_path(dose), method: :delete, data: { confirm: "Are you sure?" } do %>
-        <i class="fas fa-times"></i>
-      <% end %>
-      </li>
-    <% end %>
-  </ul>
-</div>

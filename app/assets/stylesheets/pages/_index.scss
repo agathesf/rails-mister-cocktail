@@ -34,13 +34,18 @@ a:hover {
   inline-size: max-content;
 }
 
+.right h1 {
+  position: absolute;
+  bottom: 0px;
+}
+
 .left:hover h1 {
   left: -1220px;
 }
 
 .bottom {
   position: fixed;
-  top: 60%;
+  top: 51%;
   justify-content: space-between;
   padding: 0px 20px;
   width: 50vw;
@@ -53,7 +58,7 @@ a:hover {
 
 .ingredient {
   position: fixed;
-  top: 60%;
+  top: 51%;
   justify-content: space-between;
   padding: 0px 20px;
   width: 65vw;
@@ -161,12 +166,125 @@ span::before {
   }
 }
 
+.add-ingredient {
+  position: fixed;
+  bottom: 40px;
+  right: 36%;
+  font-size: 35px;
+}
+
 .glass {
   position: fixed;
   color: black !important;
-  font-size: 300px;
-  top: 30%;
-  right: 6%;
+  font-size: 140px;
+  top: 44%;
+  right: 2%;
+}
+
+.right:hover .glass {
+  color: black !important;
+  -webkit-animation: shake .9s;
+  -moz-animation: shake .9s;
+  animation: shake .9s;
+}
+
+@-webkit-keyframes shake {
+  0% {
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+  }
+  50% {
+    top: 40%;
+    opacity: 1;
+    -webkit-transform: rotate(10deg);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: rotate(-10deg);
+  }
+  70% {
+    opacity: 1;
+    -webkit-transform: rotate(10deg);
+  }
+  80% {
+    top: 40%;
+    opacity: 1;
+    -webkit-transform: rotate(-10deg);
+  }
+  90% {
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+  }
+}
+
+@-moz-keyframes shake {
+  0% {
+    opacity: 1;
+    -moz-transform: rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    -moz-transform: rotate(0deg);
+  }
+  50% {
+    top: 40%;
+    opacity: 1;
+    -moz-transform: rotate(10deg);
+  }
+  60% {
+    opacity: 1;
+    -moz-transform: rotate(-10deg);
+  }
+  70% {
+    opacity: 1;
+    -moz-transform: rotate(10deg);
+  }
+  80% {
+    top: 40%;
+    opacity: 1;
+    -moz-transform: rotate(-10deg);
+  }
+  90% {
+    opacity: 1;
+    -moz-transform: rotate(0deg);
+  }
+}
+
+@keyframes shake {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  50% {
+    top: 40%;
+    opacity: 1;
+    transform: rotate(10deg);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(-10deg);
+  }
+  70% {
+    opacity: 1;
+    transform: rotate(10deg);
+  }
+  80% {
+    top: 40%;
+    opacity: 1;
+    transform: rotate(-10deg);
+  }
+  90% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
 }
 
 .cards {
@@ -181,7 +299,7 @@ span::before {
   background-size: cover;
   background-position: center;
   filter: grayscale(1);
-  height: 96vh;
+  height: 97vh;
   display: flex;
   justify-content: center;
   align-items: center;

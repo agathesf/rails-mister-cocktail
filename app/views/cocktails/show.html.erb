@@ -4,11 +4,13 @@
     <h1 style="color: white"><%= @cocktail.name.upcase %></h1>
 
     <div class="ingredient d-flex">
-      <%= link_to "< Back", cocktails_path, class: "btn btn-ghost", style: 'color: white;' %>
-      <%= link_to new_cocktail_dose_path(@cocktail) do %>
-        <i class="fas fa-plus add add-ingredient" style="color: white !important"></i>
-      <% end %>
-      <div class="">
+      <%= link_to "Back", cocktails_path, class: "back", style: 'color: white; padding-left: 10px;' %>
+      <p class="time" style="color: white">
+        <span id="time"><%= Time.new.strftime("%H:%M") %></span>
+        <span>Whatever... It's <em style="font-family: Pinyon Script; font-size: 22px; line-height: 23px;">&nbspapéro time&nbsp</em> somewhere in the world</span>
+      </p>
+        <i class="fas fa-plus add add-ingredient" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="color: white !important"></i>
+      <div class="ingredients-list">
             <ul>
               <% @cocktail.doses.each do |dose| %>
                 <li class="tag d-flex justify-content-between"><%= dose.description %> of <%= dose.ingredient.name %>
@@ -19,13 +21,39 @@
               <% end %>
             </ul>
       </div>
+      <p class="moto" style="color: white">
+        <%=@cocktail.name%> 
+        should be served <span style="color: gold;"><%= [ "cold", "cool", "fresh", "sparkling" ].sample %></span>, 
+        ideal for <%= [ "a pool party in Ibiza", "a nice aperitif", "a warm day by the pool", "relax from your work day" ].sample %>, with friends. 
+        To be consumed with moderation.
+      </p>
     </div>
   </div>
   
   <div class="right col-4" style="background-color: gold; height: 100vh;">
-    <i class="glass fas fa-glass-martini-alt"></i>
-    <h1 style="line-height: 100px;"><strong style="font-size: 164px">IT'S</strong><br><strong style="font-size: 164px">TIME TO</strong> <strong style="font-size: 164px">SHAKE.</strong></h1>
+    <img src="https://source.unsplash.com/1600x900/?<%=@cocktail.name.tr(' ', '')%>" alt="">
+    <h1 style="line-height: 90px;">
+      <strong style="font-size: 150px; color: white;">IT'S</strong><br>
+      <i class="glass fas fa-glass-martini-alt"></i>
+      <strong style="font-size: 150px; color: white;">TIME TO</strong>
+      <strong style="font-size: 150px; color: gold;">SHAKE.</strong>
+    </h1>
   </div>
 
 </div>
 
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-d mx-5" role="document">
+    <div class="modal-content">
+      <%= simple_form_for [ @cocktail, @dose ] do |f| %>
+        <%= f.input :description, placeholder: "How many ?" %>
+        <p style="color: white; font-size: 70px; line-height: 120px; margin: 0 30px;"> of </p>
+        <%= f.association :ingredient, prompt: "What ?" %>
+        <button name="button" type="submit" class="btn">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      <% end %>
+    </div>
+    <%= link_to "No, thanks", cocktail_path(@cocktail), class: "back", style: 'color: white; padding-left: 10px; position: absolute; bottom: 30px;' %>
+  </div>
+</div>

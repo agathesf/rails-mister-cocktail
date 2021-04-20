@@ -5,10 +5,8 @@
     <h1>MIX&TWIST</h1>
 
     <div class="bottom d-flex">
-      <p><span> </span></p>
-      <%= link_to new_cocktail_path do%>
-        <i class="fas fa-plus add"></i>
-      <% end %>
+      <p><span class="cheers"> </span></p>
+        <i class="fas fa-plus add" type="button" data-toggle="modal" data-target="#exampleModalCenter"></i>
       <p class="moto">List your signature <em style="font-family: Pinyon Script; font-size: 50px; line-height: 30px;"> cocktail </em> recipes in this custom online bartending manual and master the subtle <em style="font-family: Pinyon Script; font-size: 50px; line-height: 30px;">art</em> <br> of balancing the elements that makes cocktail the most fancy of drinks.</p>
     </div>
   </div>
@@ -25,4 +23,18 @@
     </div>
   </div>
 
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-d mx-5" role="document">
+    <div class="modal-content">
+          <%= simple_form_for @cocktail do |f| %>
+            <%= f.input :name, placeholder: "What's your cocktail name ?" %>
+            <button name="button" type="submit" class="btn">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          <% end %>
+    </div>
+    <%= link_to "No, thanks", cocktails_path, class: "back", style: 'color: white; padding-left: 10px; position: absolute; bottom: 30px;' %>
+  </div>
 </div>

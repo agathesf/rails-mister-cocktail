@@ -6,33 +6,28 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-require 'open-uri'
+require 'httparty'
 require 'json'
 
 Cocktail.destroy_all
 Dose.destroy_all
 Ingredient.destroy_all
 
-url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
-drinks_serialized = open(url).read
+begin
+  url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+  response = HTTParty.get(url)
+  list_drinks = JSON.parse(response.body)
+  my_drinks = list_drinks['drinks']
 
-list_drinks = JSON.parse(drinks_serialized)
-my_drinks = list_drinks['drinks']
+  puts 'Creating ingredients...'
+  ingredients = my_drinks.map { |drink| drink['strIngredient1'] }
+  ingredients.each { |ingredient| Ingredient.create(name: ingredient) }
 
-puts 'Creating drinks...'
-ingredients = []
-my_drinks.each do |drink|
-  ingredients << drink["strIngredient1"]
+  puts 'Creating cocktails...'
+  cocktail_names = ["Mojito", "Margarita", "Pina Colada", "Bloody Mary", "Gin Tonic", "Cosmopolitan"]
+  cocktail_names.each { |name| Cocktail.create(name: name) }
+
+  puts 'Seeding complete!'
+rescue StandardError => e
+  puts "Error while fetching data from the API: #{e.message}"
 end
-10.times do
-  ingredients.each do |ingredient|
-    Ingredient.create(name: ingredient)
-  end
-end
-
-Cocktail.create(name: "Mojito")
-Cocktail.create(name: "Margarita")
-Cocktail.create(name: "Pina Colada")
-Cocktail.create(name: "Bloody Mary")
-Cocktail.create(name: "Gin Tonic")
-Cocktail.create(name: "Cosmopolitan")
